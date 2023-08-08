@@ -23,15 +23,29 @@ class _StartPageState extends State<StartPage> {
           children: [
             Row(
               children: [
-                Container(
-                  
-                  margin: const EdgeInsets.all(10),
-                  
-                   width: MediaQuery.of(context).size.width/2,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.asset("assets/images/1.jpg"),
-                  )
+                Column(
+                  children: [
+                    Container(
+                      
+                      margin: const EdgeInsets.all(10),
+                       
+                       width: MediaQuery.of(context).size.width/2,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.asset("assets/images/5.jpg"),
+                      )
+                    ),
+                    Container(
+                      
+                      margin: const EdgeInsets.all(10),
+                      
+                       width: MediaQuery.of(context).size.width/2,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.asset("assets/images/1.jpg"),
+                      )
+                    ),
+                  ],
                 ),
                 Expanded(
                   child: Column(
