@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kloth/core/responsive_text.dart';
 import 'package:kloth/features/auth/controller/auth_controller.dart';
+import 'package:kloth/features/auth/screens/login_page.dart';
 import 'package:kloth/utlis/color.dart';
+import 'package:kloth/utlis/dimensions.dart';
 
 class StartPage extends ConsumerWidget {
   const StartPage({super.key});
@@ -27,14 +30,22 @@ class StartPage extends ConsumerWidget {
                 Column(
                   children: [
                     Container(
-                        margin: const EdgeInsets.all(10),
+                        margin: EdgeInsets.symmetric(
+                            vertical: MediaQuery.of(context).size.height /
+                                hei(context, 10),
+                            horizontal: MediaQuery.of(context).size.width /
+                                wid(context, 10)),
                         width: MediaQuery.of(context).size.width / 2,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: Image.asset("assets/images/5.jpg"),
                         )),
                     Container(
-                        margin: const EdgeInsets.all(10),
+                        margin: EdgeInsets.symmetric(
+                            vertical: MediaQuery.of(context).size.height /
+                                hei(context, 10),
+                            horizontal: MediaQuery.of(context).size.width /
+                                wid(context, 10)),
                         width: MediaQuery.of(context).size.width / 2,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20),
@@ -46,7 +57,6 @@ class StartPage extends ConsumerWidget {
                   child: Column(
                     children: [
                       Container(
-                          //  width: 140,
                           margin: const EdgeInsets.all(10),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
@@ -96,10 +106,12 @@ class StartPage extends ConsumerWidget {
               width: MediaQuery.of(context).size.width,
               margin: const EdgeInsets.only(right: 20, left: 20, top: 7),
               child: TextButton(
-                onPressed: () => signInGoogle(ref),
-                child: const Text(
-                  "Get Started",
-                  style: TextStyle(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>login_Page()));
+                },
+                child: ResponsiveText(
+                  text: "Get Started",
+                  style: const TextStyle(
                       fontFamily: "SF", color: Colors.white, fontSize: 16.5),
                 ),
               ),
@@ -107,24 +119,6 @@ class StartPage extends ConsumerWidget {
             const SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Already have an Account? ",
-                  style: TextStyle(fontFamily: "SF", fontSize: 14.5),
-                ),
-                InkWell(
-                  focusColor: Colors.transparent,
-                  onTap: () {},
-                  child: const Text(
-                    "Login",
-                    style: TextStyle(
-                        fontFamily: "SF", color: primaryAccent, fontSize: 14.5),
-                  ),
-                )
-              ],
-            )
           ],
         ),
       ),
