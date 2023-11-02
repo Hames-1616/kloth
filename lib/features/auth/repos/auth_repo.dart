@@ -65,9 +65,9 @@ class AuthRepo {
     try {
       final remember = await SharedPreferences.getInstance();
       dio.options.headers['jwt'] = remember.getString("token");
-      var response = await dio.post("http://192.168.29.94:3000/users/login",
+      await dio.post("http://192.168.29.94:3000/users/login",
           data: {"email": email, "password": password});
-      return right("");
+      return right("success");
     } on DioException catch (e) {
       return left(Failure(e.response?.data["message"]));
       //

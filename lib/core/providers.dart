@@ -5,7 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 final firestoreProvider = Provider((ref) => FirebaseFirestore.instance);
 final authProvider = Provider((ref) => FirebaseAuth.instance);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kloth/features/auth/repos/auth_repo.dart';
 import 'package:kloth/features/auth/screens/start_page.dart';
 import 'package:kloth/utlis/color.dart';
 import 'package:firebase_core/firebase_core.dart';

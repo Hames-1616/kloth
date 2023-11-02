@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kloth/core/navigatorAnimation.dart';
 import 'package:kloth/core/responsive_text.dart';
-import 'package:kloth/features/auth/controller/auth_controller.dart';
 import 'package:kloth/features/auth/screens/login_page.dart';
 import 'package:kloth/utlis/color.dart';
 import 'package:kloth/utlis/dimensions.dart';
