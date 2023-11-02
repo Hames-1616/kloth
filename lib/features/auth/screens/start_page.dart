@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kloth/core/navigatorAnimation.dart';
 import 'package:kloth/core/responsive_text.dart';
 import 'package:kloth/features/auth/controller/auth_controller.dart';
 import 'package:kloth/features/auth/screens/login_page.dart';
@@ -9,9 +10,7 @@ import 'package:kloth/utlis/dimensions.dart';
 class StartPage extends ConsumerWidget {
   const StartPage({super.key});
 
-  void signInGoogle(WidgetRef ref) {
-    ref.read(authControllerProvider).signInWithGoogle();
-  }
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -107,7 +106,7 @@ class StartPage extends ConsumerWidget {
               margin: const EdgeInsets.only(right: 20, left: 20, top: 7),
               child: TextButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>login_Page()));
+                  Navigator.push(context, SlidePageRoute.create(login_Page()));
                 },
                 child: ResponsiveText(
                   text: "Get Started",
