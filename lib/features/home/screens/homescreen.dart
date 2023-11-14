@@ -7,7 +7,9 @@ class Homepage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return const Scaffold(
-      body: Center(child: Text("Home"),),
+      body: Center(
+        child: Text("Home"),
+      ),
     );
   }
 }

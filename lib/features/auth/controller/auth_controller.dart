@@ -25,9 +25,7 @@ class AuthController extends StateNotifier<bool> {
     return s.fold((l) {
       ShowSnackBar(context, l.message);
       return false;
-    }, (r) async {
-      final remember = await SharedPreferences.getInstance();
-      await remember.setString("token", r);
+    }, (r){
       return true;
     });
   }
@@ -40,7 +38,9 @@ class AuthController extends StateNotifier<bool> {
     return s.fold((l) {
       ShowSnackBar(context, l.message);
       return false;
-    }, (r) {
+    }, (r) async {
+      final remember = await SharedPreferences.getInstance();
+      await remember.setString("token", r);
       return true;
     });
   }

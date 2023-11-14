@@ -7,7 +7,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kloth/core/failure.dart';
 import 'package:kloth/core/providers.dart';
 import 'package:kloth/core/type_def.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final authRepoController = Provider((ref) {
   return AuthRepo(
@@ -41,20 +40,16 @@ class AuthRepo {
           idToken: (await googleUser?.authentication)?.idToken);
       UserCredential userCredential =
           await auth.signInWithCredential(credential);
-      print(userCredential.user?.email);
-    } catch (E) {
-      print(E);
-    }
+      print(userCredential);
+    } catch (E) {}
   }
 
   FutureEither<String> createAccount(
       String name, String email, String password) async {
     try {
-      var response = await dio.post(
-          "http://192.168.29.94:3000/users/createuser",
+      await dio.post("https://zealous-lamb-garment.cyclic.app/users/createuser",
           data: {"name": name, "email": email, "password": password});
-      String token = response.data['access_token'];
-      return right(token);
+      return right("success");
     } on DioException catch (e) {
       return left(Failure(e.response?.data["message"]));
       //
@@ -63,11 +58,13 @@ class AuthRepo {
 
   FutureEither<String> loginAccount(String email, String password) async {
     try {
-      final remember = await SharedPreferences.getInstance();
-      dio.options.headers['jwt'] = remember.getString("token");
-      await dio.post("http://192.168.29.94:3000/users/login",
+      // final remember = await SharedPreferences.getInstance();
+      // dio.options.headers['jwt'] = remember.getString("token");
+      var response = await dio.post(
+          "https://zealous-lamb-garment.cyclic.app/users/login",
           data: {"email": email, "password": password});
-      return right("success");
+      String token = response.data['access_token'];
+      return right(token);
     } on DioException catch (e) {
       return left(Failure(e.response?.data["message"]));
       //

@@ -96,24 +96,25 @@ class StartPage extends ConsumerWidget {
                           fontSize: 30,
                           color: Colors.black)),
                 ]))),
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: primaryBgcolor),
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.only(right: 20, left: 20, top: 7),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.push(context, SlidePageRoute.create(login_Page()));
-                },
+            InkWell(
+              onTap: (){
+                    Navigator.push(context, SlidePageRoute.create(const login_Page()));
+                  },
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: primaryBgcolor),
+                alignment: Alignment.center,
+                height: MediaQuery.of(context).size.height/hei(context, 50),
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(right: 20, left: 20, top: 7),
                 child: ResponsiveText(
-                  text: "Get Started",
-                  style: const TextStyle(
-                      fontFamily: "SF", color: Colors.white, fontSize: 16.5),
+                    text: "Get Started",
+                    style: const TextStyle(
+                        fontFamily: "SF", color: Colors.white, fontSize: 16.5),
+                  ),
                 ),
               ),
-            ),
             const SizedBox(
               height: 10,
             ),
