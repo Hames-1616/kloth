@@ -4,8 +4,6 @@ import 'package:kloth/core/custom_textfield.dart';
 import 'package:kloth/core/dimensions.dart';
 import 'package:kloth/core/loadingScreen.dart';
 import 'package:kloth/core/navigatorAnimation.dart';
-import 'package:kloth/core/providers.dart';
-
 import 'package:kloth/core/responsive_text.dart';
 import 'package:kloth/features/auth/controller/auth_controller.dart';
 import 'package:kloth/features/auth/screens/login_page.dart';
