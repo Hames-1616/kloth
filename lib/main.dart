@@ -29,7 +29,10 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primaryColor: primaryAccent, scaffoldBackgroundColor: Colors.white),
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: primaryAccent,
+          secondary: secondaryAccent),
+          scaffoldBackgroundColor: Colors.white),
       home: ref.watch(stringToken).when(
           data: (data) {
             if (data != null) {
@@ -38,7 +41,9 @@ class MyApp extends ConsumerWidget {
             return const StartPage();
           },
           error: (error, st) {
-            return  Center(child: Text(error.toString()),);
+            return Center(
+              child: Text(error.toString()),
+            );
           },
           loading: () => const Loading()),
     );
