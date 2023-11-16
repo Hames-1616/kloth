@@ -35,7 +35,7 @@ class Homepage extends ConsumerWidget {
                           height: MediaQuery.of(context).size.height /
                               hei(context, 70),
                           child: ResponsiveText(
-                            text: "Found ${data.length} results",
+                            text: "Found ${data.length} Results",
                             textAlign: TextAlign.start,
                             style: const TextStyle(
                                 fontFamily: "SF",
@@ -94,7 +94,8 @@ class Homepage extends ConsumerWidget {
                                             )),
                                           )),
                               Container(
-                                margin: const EdgeInsets.only(right:15,left:15,top: 15,bottom: 5),
+                                margin: const EdgeInsets.only(
+                                    right: 15, left: 15, top: 15, bottom: 5),
                                 alignment: Alignment.centerLeft,
                                 child: ResponsiveText(
                                   text: (data[index - 1].name)!
@@ -107,18 +108,23 @@ class Homepage extends ConsumerWidget {
                                 ),
                               ),
                               Container(
-                                margin: const EdgeInsets.only(left: 15,right: 15,bottom: 10),
+                                margin: const EdgeInsets.only(
+                                    left: 15, right: 15, bottom: 10),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                  ResponsiveText(text: "₹${data[index-1].price}",style: const TextStyle(
-                                      fontFamily: "SF",
-                                      fontSize: 16,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600),),
-                                      const LikeButton()
-
-                                ],),
+                                    ResponsiveText(
+                                      text: "₹${data[index - 1].price}",
+                                      style: const TextStyle(
+                                          fontFamily: "SF",
+                                          fontSize: 16,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    const LikeButton()
+                                  ],
+                                ),
                               )
                             ],
                           ),
@@ -127,10 +133,11 @@ class Homepage extends ConsumerWidget {
                     });
               },
               error: (error, st) {
-                return const Icon(
-                  Icons.error,
-                  size: 26,
-                );
+                return Text(error.toString());
+                // const Icon(
+                //   Icons.error,
+                //   size: 26,
+                // );
               },
               loading: () => const Loading())),
     ));

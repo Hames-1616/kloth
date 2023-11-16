@@ -17,3 +17,5 @@ final stringToken = FutureProvider((ref) async {
   final token = await SharedPreferences.getInstance();
   return token.getString("token");
 });
+
+final loginscreen = StateProvider<bool>((ref) => false);
