@@ -29,143 +29,155 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
   final password = TextEditingController();
   final cpassword = TextEditingController();
   String cpass = "";
-   final GlobalKey<FormState> register =
+  bool disploading = false;
+  final GlobalKey<FormState> register =
       GlobalKey<FormState>(debugLabel: "registerkey");
   @override
   Widget build(BuildContext context) {
     return ref.watch(authControllerProvider)
         ? const Loading()
         : Scaffold(
-            body: Form(
-              key: register,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    height:
-                        MediaQuery.of(context).size.height / hei(context, 200),
-                    width: MediaQuery.of(context).size.width,
-                    child: Image.asset("assets/images/registercover.png"),
-                  ),
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height /
-                          hei(context, 10)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ResponsiveText(
-                        text: "Sign ",
-                        style: const TextStyle(
-                            fontFamily: "Future",
-                            fontSize: 30,
-                            color: Colors.black),
-                      ),
-                      ResponsiveText(
-                        text: "Up",
-                        style: const TextStyle(
-                            fontFamily: "Future",
-                            fontSize: 30,
-                            color: primaryAccent),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height /
-                          hei(context, 20)),
-                  CustomTextField(
-                      hintText: "Name",
-                      icon: Icons.person,
-                      onChanged: (value) {},
-                      con: name),
-                  CustomTextField(
-                      hintText: "Email",
-                      icon: Icons.mail,
-                      onChanged: (value) {},
-                      con: email),
-                  CustomTextField(
-                      obscureText: true,
-                      hintText: "Password",
-                      icon: Icons.password,
-                      onChanged: (value) {
-                        setState(() {
-                          cpass = value;
-                        });
-                      },
-                      con: password),
-                  CustomTextField(
-                      obscureText: true,
-                      conf: cpass,
-                      hintText: "Confirm Password",
-                      icon: Icons.password_rounded,
-                      onChanged: (value) {},
-                      con: cpassword),
-                  InkWell(
-                    onTap: () async {
-                          if (register.currentState!.validate()) {
-                            final s = await createAccount();
-                            if (s) {
-                              name.clear();
-                              email.clear();
-                              password.clear();
-                              cpassword.clear();
-                  
-                              // ignore: use_build_context_synchronously
-                              Navigator.pushReplacement(context, SlidePageRoute.create(const login_Page()));
-                            }
-                          }
-                        },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: primaryBgcolor),
+            body: Stack(children: [
+              Form(
+                key: register,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
                       alignment: Alignment.center,
-                      height: MediaQuery.of(context).size.height/hei(context, 50),
+                      height: MediaQuery.of(context).size.height /
+                          hei(context, 200),
                       width: MediaQuery.of(context).size.width,
-                      margin: const EdgeInsets.only(right: 20, left: 20, top: 7),
-                      child:  ResponsiveText(
+                      child: Image.asset("assets/images/registercover.png"),
+                    ),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height /
+                            hei(context, 10)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ResponsiveText(
+                          text: "Sign ",
+                          style: const TextStyle(
+                              fontFamily: "Future",
+                              fontSize: 30,
+                              color: Colors.black),
+                        ),
+                        ResponsiveText(
+                          text: "Up",
+                          style: const TextStyle(
+                              fontFamily: "Future",
+                              fontSize: 30,
+                              color: primaryAccent),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height /
+                            hei(context, 20)),
+                    CustomTextField(
+                        hintText: "Name",
+                        icon: Icons.person,
+                        onChanged: (value) {},
+                        con: name),
+                    CustomTextField(
+                        hintText: "Email",
+                        icon: Icons.mail,
+                        onChanged: (value) {},
+                        con: email),
+                    CustomTextField(
+                        obscureText: true,
+                        hintText: "Password",
+                        icon: Icons.password,
+                        onChanged: (value) {
+                          setState(() {
+                            cpass = value;
+                          });
+                        },
+                        con: password),
+                    CustomTextField(
+                        obscureText: true,
+                        conf: cpass,
+                        hintText: "Confirm Password",
+                        icon: Icons.password_rounded,
+                        onChanged: (value) {},
+                        con: cpassword),
+                    InkWell(
+                      onTap: () async {
+                        if (register.currentState!.validate()) {
+                          setState(() {
+                            disploading = true;
+                          });
+                          final s = await createAccount();
+                          if (s) {
+                            name.clear();
+                            email.clear();
+                            password.clear();
+                            cpassword.clear();
+
+                            // ignore: use_build_context_synchronously
+                            Navigator.pushReplacement(context,
+                                SlidePageRoute.create(const login_Page()));
+                          } else {
+                            disploading = false;
+                          }
+                        }
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: primaryBgcolor),
+                        alignment: Alignment.center,
+                        height: MediaQuery.of(context).size.height /
+                            hei(context, 50),
+                        width: MediaQuery.of(context).size.width,
+                        margin:
+                            const EdgeInsets.only(right: 20, left: 20, top: 7),
+                        child: ResponsiveText(
                           text: "Register",
                           style: const TextStyle(
                               fontFamily: "SF",
                               color: Colors.white,
                               fontSize: 16.5),
                         ),
-                    ),
-                  ),
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height /
-                          hei(context, 10)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ResponsiveText(
-                        textAlign: TextAlign.center,
-                        text: "Already have an Account ?",
-                        style: const TextStyle(
-                            fontFamily: "SF",
-                            fontSize: 15,
-                            color: Colors.black),
                       ),
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: ResponsiveText(
+                    ),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height /
+                            hei(context, 10)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ResponsiveText(
                           textAlign: TextAlign.center,
-                          text: " Login",
+                          text: "Already have an Account ?",
                           style: const TextStyle(
                               fontFamily: "SF",
                               fontSize: 15,
-                              color: primaryAccent),
+                              color: Colors.black),
                         ),
-                      )
-                    ],
-                  )
-                ],
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: ResponsiveText(
+                            textAlign: TextAlign.center,
+                            text: " Login",
+                            style: const TextStyle(
+                                fontFamily: "SF",
+                                fontSize: 15,
+                                color: primaryAccent),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
-            ),
+              disploading ? const Loading() : Container(),
+            ]),
           );
   }
 }

@@ -47,7 +47,7 @@ class AuthRepo {
   FutureEither<String> createAccount(
       String name, String email, String password) async {
     try {
-      await dio.post("http://192.168.29.94:3000/users/createuser",
+      await dio.post("https://zealous-lamb-garment.cyclic.app/users/createuser",
           data: {"name": name, "email": email, "password": password});
       return right("success");
     } on DioException catch (e) {
@@ -60,7 +60,8 @@ class AuthRepo {
     try {
       // final remember = await SharedPreferences.getInstance();
       // dio.options.headers['jwt'] = remember.getString("token");
-      var response = await dio.post("http://192.168.29.94:3000/users/login",
+      var response = await dio.post(
+          "https://zealous-lamb-garment.cyclic.app/users/login",
           data: {"email": email, "password": password});
       String token = response.data['access_token'];
       return right(token);

@@ -31,13 +31,10 @@ class _login_PageState extends ConsumerState<login_Page> {
 
   @override
   Widget build(BuildContext context) {
-    return 
-    ref.watch(authControllerProvider)
+    return ref.watch(authControllerProvider)
         ? const Loading()
-        : 
-        Scaffold(
+        : Scaffold(
             body: Stack(children: <Widget>[
-              
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

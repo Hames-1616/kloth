@@ -18,7 +18,8 @@ class HomeRepo {
   Reference get firebaseStorage => FirebaseStorage.instance.ref();
   Future<List<Items>> getitems() async {
     dio.options.headers['jwt'] = await ref.watch(stringToken.future);
-    var response = await dio.get("http://192.168.29.94:3000/items/all");
+    var response =
+        await dio.get("https://zealous-lamb-garment.cyclic.app/items/all");
     final s = (response.data as List).map((e) => Items.fromJson(e)).toList();
     return s;
   }
