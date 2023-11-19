@@ -44,7 +44,7 @@ class _MyAppState extends ConsumerState<MyApp> {
             colorScheme: ColorScheme.fromSwatch()
                 .copyWith(primary: primaryAccent, secondary: secondaryAccent),
             scaffoldBackgroundColor: Colors.white),
-        home: login ? const Homepage() : const StartPage()
+        home: login ?   Homepage() : const StartPage()
         );
   }
 }

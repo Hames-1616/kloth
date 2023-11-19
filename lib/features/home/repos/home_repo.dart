@@ -39,4 +39,12 @@ class HomeRepo {
       ref.watch(loginscreen.notifier).state = false;
     }
   }
+
+  Future<List<Items>> searchItem(String item) async{
+        dio.options.headers['jwt'] = await ref.watch(stringToken.future);
+    var response =
+        await dio.get("https://zealous-lamb-garment.cyclic.app/items/list/$item");
+    final s = (response.data as List).map((e) => Items.fromJson(e)).toList();
+    return s;
+  }
 }

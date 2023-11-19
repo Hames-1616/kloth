@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kloth/features/home/model/item_model.dart';
 import 'package:kloth/features/home/repos/home_repo.dart';
 
+final searchitemProvider = FutureProvider.family((ref,String item) => ref.watch(homeControllerProvider.notifier).getitem(item));
+
 final imageProvider = FutureProvider.family((ref, String name) =>
     ref.watch(homeControllerProvider.notifier).getimg(name));
 
@@ -29,4 +31,9 @@ class HomeController extends StateNotifier<bool> {
   void checkToken(){
     hrepo.checktoken();
   }
+
+    Future<List<Items>> getitem(String item) async {
+    return await hrepo.searchItem(item);
+  }
+
 }
