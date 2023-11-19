@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:kloth/core/loadingScreen.dart';
-import 'package:kloth/core/responsive_text.dart';
 import 'package:kloth/features/home/components/itemdisp.dart';
 import 'package:kloth/features/home/components/searchbar.dart';
 import 'package:kloth/features/home/controller/home_Controller.dart';
