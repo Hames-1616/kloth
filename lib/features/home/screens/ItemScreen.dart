@@ -48,15 +48,22 @@ class _ItemScreenState extends ConsumerState<ItemScreen> {
         body: Center(
           child: Column(
             children: [
-              CarouselSlider(
-                  options: CarouselOptions(),
-                  items: ref
-                      .watch(imagesProvider)
-                      .map((e) => CachedNetworkImage(
-                            imageUrl: e,
-                            placeholder: (context, url) => const Loading(),
-                          ))
-                      .toList()),
+              Container(
+                margin: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.grey.shade300,
+                ),
+                child: CarouselSlider(
+                    options: CarouselOptions(),
+                    items: ref
+                        .watch(imagesProvider)
+                        .map((e) => CachedNetworkImage(
+                              imageUrl: e,
+                            ))
+                        .toList()),
+              ),
             ],
             
           ),
