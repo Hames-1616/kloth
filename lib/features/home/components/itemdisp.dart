@@ -5,6 +5,7 @@ import 'package:kloth/core/dimensions.dart';
 import 'package:kloth/core/responsive_text.dart';
 import 'package:kloth/features/home/controller/home_Controller.dart';
 import 'package:kloth/features/home/model/item_model.dart';
+import 'package:kloth/features/home/screens/ItemScreen.dart';
 import 'package:kloth/utlis/color.dart';
 import 'package:like_button/like_button.dart';
 
@@ -12,7 +13,11 @@ class DispItem extends ConsumerStatefulWidget {
   final List<Items> data;
   final int index;
   final int minus;
-  const DispItem({super.key, required this.data, required this.index,required this.minus});
+  const DispItem(
+      {super.key,
+      required this.data,
+      required this.index,
+      required this.minus});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _DispItemState();
@@ -30,11 +35,20 @@ class _DispItemState extends ConsumerState<DispItem> {
         splashColor: Colors.transparent,
         focusColor: Colors.transparent,
         highlightColor: Colors.transparent,
-        onTap: () {},
+        onTap: () {
+          ref.read(homeControllerProvider.notifier).caroImages(widget.data[widget.index-widget.minus].name ?? "");
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ItemScreen(
+                        data: widget.data[widget.index-widget.minus],
+                      )));
+        },
         child: Column(
           children: [
             ref
-                .watch(imageProvider(widget.data[widget.index - widget.minus].name ?? ""))
+                .watch(imageProvider(
+                    widget.data[widget.index - widget.minus].name ?? ""))
                 .when(
                     data: (data) {
                       return SizedBox(
@@ -70,8 +84,8 @@ class _DispItemState extends ConsumerState<DispItem> {
                   right: 15, left: 15, top: 15, bottom: 5),
               alignment: Alignment.centerLeft,
               child: ResponsiveText(
-                text:
-                    (widget.data[widget.index - widget.minus].name)!.replaceAll("_", " "),
+                text: (widget.data[widget.index - widget.minus].name)!
+                    .replaceAll("_", " "),
                 style: const TextStyle(
                     fontFamily: "SF",
                     fontSize: 18,

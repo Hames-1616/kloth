@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:kloth/core/loadingScreen.dart';
+import 'package:kloth/core/responsive_text.dart';
 import 'package:kloth/features/home/components/itemdisp.dart';
 import 'package:kloth/features/home/components/searchbar.dart';
 import 'package:kloth/features/home/controller/home_Controller.dart';
@@ -32,7 +33,6 @@ class _SearchPageState extends ConsumerState<SearchPage> {
               child: SearchItem(
                   onChanged: (value) {
                     setState(() {
-                      searchController.text = value;
                     });
                   },
                   con: searchController))
@@ -40,25 +40,38 @@ class _SearchPageState extends ConsumerState<SearchPage> {
       ),
       body: Center(
         child: searchController.text == ""
-            ? Container()
+            ? ResponsiveText(
+                text: "Search an Item",
+                style: const TextStyle(
+                    fontFamily: "SF", fontSize: 20, color: Colors.black),
+              )
             : ref.watch(searchitemProvider(searchController.text)).when(
                 data: (data) {
-                  return AnimationLimiter(
-                      child: MasonryGridView.builder(
-                          itemCount: data.length,
-                          gridDelegate:
-                              const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2),
-                          itemBuilder: ((context, index) =>
-                              AnimationConfiguration.staggeredGrid(
-                                  position: index,
-                                  columnCount: data.length,
-                                  duration: const Duration(milliseconds: 400),
-                                  child: ScaleAnimation(
-                                      child: DispItem(
-                                          data: data,
-                                          index: index,
-                                          minus: 0))))));
+                  if (data.isNotEmpty) {
+                    return AnimationLimiter(
+                        child: MasonryGridView.builder(
+                            itemCount: data.length,
+                            gridDelegate:
+                                const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2),
+                            itemBuilder: ((context, index) =>
+                                AnimationConfiguration.staggeredGrid(
+                                    position: index,
+                                    columnCount: data.length,
+                                    duration: const Duration(milliseconds: 400),
+                                    child: ScaleAnimation(
+                                        child: DispItem(
+                                            data: data,
+                                            index: index,
+                                            minus: 0))))));
+                  } else {
+                    
+                    return ResponsiveText(
+                      text: "No Items Found",
+                      style: const TextStyle(
+                          fontFamily: "SF", fontSize: 20, color: Colors.black),
+                    );
+                  }
                 },
                 error: (er, st) {
                   return const Icon(

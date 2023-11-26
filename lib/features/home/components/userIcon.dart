@@ -40,7 +40,7 @@ class _UserIconState extends ConsumerState<UserIcon> {
                                 borderRadius: BorderRadius.circular(100),
                                 child: CachedNetworkImage(
                                   errorWidget: (context, url, error) =>Image.asset("assets/images/user.png") ,
-                                  imageUrl: "https://nourl",
+                                  imageUrl: "https://i.ibb.co/NWbm4N6/user.png",
                                   placeholder: (context, url) =>
                                       Image.asset("assets/images/user.png"),
                                 )),
@@ -179,7 +179,7 @@ class _UserIconState extends ConsumerState<UserIcon> {
           borderRadius: BorderRadius.circular(100),
           child: CachedNetworkImage(
             errorWidget: (context, url, error) =>Image.asset("assets/images/user.png") ,
-            imageUrl: "https://nourl.com",
+            imageUrl: "https://i.ibb.co/NWbm4N6/user.png",
             placeholder: (context, url) =>
                 Image.asset("assets/images/user.png"),
           )),

@@ -19,3 +19,4 @@ final stringToken = FutureProvider((ref) async {
 });
 
 final loginscreen = StateProvider<bool>((ref) => false);
+final imagesProvider = StateProvider<List<String>>((ref) => []);

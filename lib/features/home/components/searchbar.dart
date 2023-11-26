@@ -24,7 +24,7 @@ class SearchItem extends StatelessWidget {
           }
           return null;
         },
-        maxLength: 10,
+        maxLength: 20,
         keyboardType: TextInputType.text,
         controller: con,
         style: const TextStyle(
