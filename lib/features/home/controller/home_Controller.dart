@@ -3,7 +3,6 @@ import 'package:kloth/core/providers.dart';
 import 'package:kloth/features/home/model/item_model.dart';
 import 'package:kloth/features/home/repos/home_repo.dart';
 
-
 final searchitemProvider = FutureProvider.family((ref, String item) =>
     ref.watch(homeControllerProvider.notifier).getitem(item));
 
@@ -43,6 +42,7 @@ class HomeController extends StateNotifier<bool> {
 
   void caroimages(String name) async {
     state = true;
+    ref.watch(imagesProvider.notifier).state.clear();
     ref.watch(imagesProvider.notifier).state.addAll(await hrepo.getimgs(name));
     state = false;
   }
