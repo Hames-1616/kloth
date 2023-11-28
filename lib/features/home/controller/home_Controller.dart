@@ -3,7 +3,6 @@ import 'package:kloth/core/providers.dart';
 import 'package:kloth/features/home/model/item_model.dart';
 import 'package:kloth/features/home/repos/home_repo.dart';
 
-// final CaroimagesProvider = FutureProvider.family((ref, String name) => ref.watch(homeControllerProvider.notifier).caroimages(name));
 
 final searchitemProvider = FutureProvider.family((ref, String item) =>
     ref.watch(homeControllerProvider.notifier).getitem(item));
