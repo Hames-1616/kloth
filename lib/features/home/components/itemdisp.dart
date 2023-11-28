@@ -36,7 +36,7 @@ class _DispItemState extends ConsumerState<DispItem> {
         focusColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onTap: () {
-          ref.read(homeControllerProvider.notifier).caroImages(widget.data[widget.index-widget.minus].name ?? "");
+          ref.read(homeControllerProvider.notifier).caroimages(widget.data[widget.index-widget.minus].name ?? "");
           Navigator.push(
               context,
               MaterialPageRoute(

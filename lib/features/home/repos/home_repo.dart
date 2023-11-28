@@ -25,9 +25,20 @@ class HomeRepo {
   }
 
   Future<String> getimg(String name) async {
-    var urlref = firebaseStorage.child("$name.png");
+    var urlref = firebaseStorage.child(name).child("$name.png");
     var imgurl = await urlref.getDownloadURL();
     return imgurl;
+  }
+
+  Future<List<String>> getimgs(String name) async {
+    List<String> caroimages = [];
+    var urlref = firebaseStorage.child(name);
+    var images = await urlref.listAll();
+    for (var i in images.items) {
+      var s = firebaseStorage.child(i.fullPath);
+      caroimages.add(await s.getDownloadURL());
+    }
+    return caroimages;
   }
 
   void checktoken() async {
@@ -40,10 +51,10 @@ class HomeRepo {
     }
   }
 
-  Future<List<Items>> searchItem(String item) async{
-        dio.options.headers['jwt'] = await ref.watch(stringToken.future);
-    var response =
-        await dio.get("https://zealous-lamb-garment.cyclic.app/items/list/$item");
+  Future<List<Items>> searchItem(String item) async {
+    dio.options.headers['jwt'] = await ref.watch(stringToken.future);
+    var response = await dio
+        .get("https://zealous-lamb-garment.cyclic.app/items/list/$item");
     final s = (response.data as List).map((e) => Items.fromJson(e)).toList();
     return s;
   }

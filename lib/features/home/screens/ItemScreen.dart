@@ -61,6 +61,7 @@ class _ItemScreenState extends ConsumerState<ItemScreen> {
                         .watch(imagesProvider)
                         .map((e) => CachedNetworkImage(
                               imageUrl: e,
+                              placeholder: (context, url) => const Loading(),
                             ))
                         .toList()),
               ),

@@ -3,6 +3,8 @@ import 'package:kloth/core/providers.dart';
 import 'package:kloth/features/home/model/item_model.dart';
 import 'package:kloth/features/home/repos/home_repo.dart';
 
+// final CaroimagesProvider = FutureProvider.family((ref, String name) => ref.watch(homeControllerProvider.notifier).caroimages(name));
+
 final searchitemProvider = FutureProvider.family((ref, String item) =>
     ref.watch(homeControllerProvider.notifier).getitem(item));
 
@@ -40,18 +42,9 @@ class HomeController extends StateNotifier<bool> {
     return await hrepo.searchItem(item);
   }
 
-  void caroImages(String name) async {
+  void caroimages(String name) async {
     state = true;
-    ref.read(imagesProvider.notifier).state.clear();
-    for (int i = 0; i < 3; i++) {
-      if (i == 0) {
-        final img = await hrepo.getimg(name);
-        ref.watch(imagesProvider.notifier).state.add(img);
-      } else {
-        final img = await hrepo.getimg(name + i.toString());
-        ref.watch(imagesProvider.notifier).state.add(img);
-      }
-    }
+    ref.watch(imagesProvider.notifier).state.addAll(await hrepo.getimgs(name));
     state = false;
   }
 }
