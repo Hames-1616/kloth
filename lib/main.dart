@@ -41,8 +41,10 @@ class _MyAppState extends ConsumerState<MyApp> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          primaryColor: primaryAccent,
+          useMaterial3: false,
             colorScheme: ColorScheme.fromSwatch()
-                .copyWith(primary: primaryAccent, secondary: secondaryAccent),
+                .copyWith(primary: primaryAccent, secondary: secondaryAccent,),
             scaffoldBackgroundColor: Colors.white),
         home: login ?   Homepage() : const StartPage()
         );

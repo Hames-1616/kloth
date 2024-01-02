@@ -48,79 +48,183 @@ class _ItemScreenState extends ConsumerState<ItemScreen> {
                     ))
               ],
             ),
-            body: Center(
-              child: Container(
-                margin: const EdgeInsets.all(20),
-                child: Column(
-                  children: [
-                    Container(
-                        margin: const EdgeInsets.all(10),
-                        padding: const EdgeInsets.all(10),
-                        child: ImageSlideshow(
-                            autoPlayInterval: 3000,
-                            isLoop: true,
-                            height: MediaQuery.of(context).size.height /
-                                hei(context, 250),
-                            indicatorColor: primaryAccent,
-                            indicatorBackgroundColor: Colors.grey.shade300,
-                            children: ref
-                                .watch(imagesProvider)
-                                .map((e) => Container(
-                                      margin: const EdgeInsets.only(bottom: 20),
-                                      child: CachedNetworkImage(
-                                        imageUrl: e,
-                                        placeholder: (context, url) =>
-                                            const Loading(),
-                                      ),
-                                    ))
-                                .toList())),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: ResponsiveText(
-                        text: widget.data.name!.replaceFirst("_", " "),
-                        style: const TextStyle(
-                            fontFamily: "SF",
-                            color: Colors.black,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      alignment: Alignment.centerLeft,
-                      child: ResponsiveText(
-                        text:
-                            "5 adjustable DPI levels (500, 1000, 2000, 3000, 5000) meet your multiple needs, either for daily work or gaming, DPI can be adjusted freely by plus/minus 100 from 100 to 10000, taking advantage of on-the-fly DPI switching to instantly match mouse speed to gameplay demands;Besides, the mouse point Speed setting in the software also allows you to mildly change the movement speed of the mouse to achieve the best fit mode for yourself",
-                        style: const TextStyle(
-                          fontFamily: "SF",
-                          color: Colors.black,
-                          fontSize: 16,
+            body: SingleChildScrollView(
+              child: Center(
+                child: Container(
+                  margin: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      Container(
+                          margin: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
+                          child: ImageSlideshow(
+                              autoPlayInterval: 3000,
+                              isLoop: true,
+                              height: MediaQuery.of(context).size.height /
+                                  hei(context, 250),
+                              indicatorColor: primaryAccent,
+                              indicatorBackgroundColor: Colors.grey.shade300,
+                              children: ref
+                                  .watch(imagesProvider)
+                                  .map((e) => Container(
+                                        margin:
+                                            const EdgeInsets.only(bottom: 20),
+                                        child: CachedNetworkImage(
+                                          imageUrl: e,
+                                          placeholder: (context, url) =>
+                                              const Loading(),
+                                        ),
+                                      ))
+                                  .toList())),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: ResponsiveText(
+                          text: widget.data.name!.replaceFirst("_", " "),
+                          style: const TextStyle(
+                              fontFamily: "SF",
+                              color: Colors.black,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
-                    ),
-                  ],
+                      Container(
+                        margin: const EdgeInsets.only(top: 10),
+                        alignment: Alignment.centerLeft,
+                        child: ResponsiveText(
+                          text: widget.data.info ?? "NA",
+                          style: const TextStyle(
+                            fontFamily: "SF",
+                            color: Colors.black,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
             bottomNavigationBar: Container(
-              height: 200,
+              height: MediaQuery.of(context).size.height / hei(context, 190),
               decoration: BoxDecoration(
                   color: Colors.grey.shade300,
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(60),
                       topRight: Radius.circular(60))),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                 const SizedBox(height: 40,),
-                  Container(
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Icon(Icons.height),
-                        Icon(Icons.sanitizer),
-                        Icon(Icons.health_and_safety)
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        children: [
+                          IconButton(
+                              icon: const Icon(
+                                Icons.height,
+                                size: 30,
+                              ),
+                              onPressed: () {
+                               
+                              }
+                              // showFloatingModalBottomSheet(
+                              //   context: context,
+                              //   builder: (context) => ModalFit(),
+                              // );
+
+                              ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          ResponsiveText(
+                            text: "Flexible",
+                            style: const TextStyle(
+                                fontFamily: "SF",
+                                fontSize: 16,
+                                color: Colors.black),
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          const Icon(
+                            Icons.wash,
+                            size: 30,
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          ResponsiveText(
+                            text: "Washable",
+                            style: const TextStyle(
+                                fontFamily: "SF",
+                                fontSize: 16,
+                                color: Colors.black),
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          const Icon(
+                            Icons.high_quality,
+                            size: 30,
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          ResponsiveText(
+                            text: "Premium",
+                            style: const TextStyle(
+                                fontFamily: "SF",
+                                fontSize: 16,
+                                color: Colors.black),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width /
+                            wid(context, 140),
+                        height: MediaQuery.of(context).size.height /
+                            hei(context, 50),
+                        decoration: BoxDecoration(
+                            color: primaryBgcolor,
+                            borderRadius: BorderRadius.circular(25)),
+                        child: InkWell(
+                          child: ResponsiveText(
+                            text: "Add to Cart",
+                            style: const TextStyle(
+                                fontFamily: "SF",
+                                color: Colors.white,
+                                fontSize: 16),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width /
+                            wid(context, 140),
+                        height: MediaQuery.of(context).size.height /
+                            hei(context, 50),
+                        decoration: BoxDecoration(
+                            color: primaryAccent,
+                            borderRadius: BorderRadius.circular(25)),
+                        child: InkWell(
+                          child: ResponsiveText(
+                            text: "Buy Now",
+                            style: const TextStyle(
+                                fontFamily: "SF",
+                                color: Colors.white,
+                                fontSize: 16),
+                          ),
+                        ),
+                      )
+                    ],
                   )
                 ],
               ),

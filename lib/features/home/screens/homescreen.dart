@@ -41,17 +41,29 @@ class Homepage extends ConsumerWidget {
                             fontFamily: "SF",
                             fontWeight: FontWeight.bold),
                       ),
-                      IconButton(
-                        icon: Hero(
-                            tag: "search",
-                            child: Image.asset("assets/images/search.png")),
-                        color: Colors.black,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SearchPage()));
-                        },
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: 
+                                Image.asset("assets/images/heart.png"),
+                            color: Colors.black,
+                            onPressed: () {
+                              
+                            },
+                          ),
+                          IconButton(
+                            icon: Hero(
+                                tag: "search",
+                                child: Image.asset("assets/images/search.png")),
+                            color: Colors.black,
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const SearchPage()));
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),
