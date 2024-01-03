@@ -58,4 +58,35 @@ class HomeRepo {
     final s = (response.data as List).map((e) => Items.fromJson(e)).toList();
     return s;
   }
+
+  Future<bool> likeditem(String name) async {
+    try {
+      dio.options.headers['jwt'] = await ref.watch(stringToken.future);
+      await dio.post(
+          "https://zealous-lamb-garment.cyclic.app/items/likeditem/$name");
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> dislikeditem(String name) async {
+    try {
+      dio.options.headers['jwt'] = await ref.watch(stringToken.future);
+      await dio.post(
+          "https://zealous-lamb-garment.cyclic.app/items/dislikeditem/$name");
+      return false;
+    } catch (e) {
+      return true;
+    }
+  }
+
+
+    Future<List<Items>> likedItems() async {
+    dio.options.headers['jwt'] = await ref.watch(stringToken.future);
+    var response = await dio
+        .get("https://zealous-lamb-garment.cyclic.app/items/getliked");
+    final s = (response.data as List).map((e) => Items.fromJson(e)).toList();
+    return s;
+  }
 }

@@ -8,6 +8,7 @@ import 'package:kloth/core/responsive_text.dart';
 import 'package:kloth/features/home/components/itemdisp.dart';
 import 'package:kloth/features/home/components/userIcon.dart';
 import 'package:kloth/features/home/controller/home_Controller.dart';
+import 'package:kloth/features/home/screens/likedItems.dart';
 import 'package:kloth/features/home/screens/searchScreen.dart';
 import 'package:kloth/utlis/color.dart';
 
@@ -23,52 +24,44 @@ class Homepage extends ConsumerWidget {
           elevation: 0,
           toolbarHeight: MediaQuery.of(context).size.height / hei(context, 60),
           actions: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  width: MediaQuery.of(context).size.width,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              width: MediaQuery.of(context).size.width,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const UserIcon(),
+                  Row(
                     children: [
-                      const UserIcon(),
-                      ResponsiveText(
-                        text: "Products",
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 22,
-                            fontFamily: "SF",
-                            fontWeight: FontWeight.bold),
+                      IconButton(
+                        splashRadius: 0.1,
+                        icon: Image.asset(
+                          "assets/images/heart1.png",
+                          height: 30,
+                          width: 30,
+                        ),
+                        color: Colors.black,
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> const LikedItems()));
+                        },
                       ),
-                      Row(
-                        children: [
-                          IconButton(
-                            icon: 
-                                Image.asset("assets/images/heart.png"),
-                            color: Colors.black,
-                            onPressed: () {
-                              
-                            },
-                          ),
-                          IconButton(
-                            icon: Hero(
-                                tag: "search",
-                                child: Image.asset("assets/images/search.png")),
-                            color: Colors.black,
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const SearchPage()));
-                            },
-                          ),
-                        ],
+                      IconButton(
+                        icon: Hero(
+                            tag: "search",
+                            child: Image.asset("assets/images/search.png")),
+                        color: Colors.black,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SearchPage()));
+                        },
                       ),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             )
           ],
         ),

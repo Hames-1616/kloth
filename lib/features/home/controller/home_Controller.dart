@@ -3,6 +3,9 @@ import 'package:kloth/core/providers.dart';
 import 'package:kloth/features/home/model/item_model.dart';
 import 'package:kloth/features/home/repos/home_repo.dart';
 
+final likedItemsProvider = FutureProvider(
+    (ref) => ref.watch(homeControllerProvider.notifier).getalllikeditems());
+
 final searchitemProvider = FutureProvider.family((ref, String item) =>
     ref.watch(homeControllerProvider.notifier).getitem(item));
 
@@ -45,5 +48,17 @@ class HomeController extends StateNotifier<bool> {
     ref.watch(imagesProvider.notifier).state.clear();
     ref.watch(imagesProvider.notifier).state.addAll(await hrepo.getimgs(name));
     state = false;
+  }
+
+  Future<bool> likeditem(String name) async {
+    return await hrepo.likeditem(name);
+  }
+
+  Future<bool> dislikeditem(String name) async {
+    return await hrepo.dislikeditem(name);
+  }
+
+  Future<List<Items>> getalllikeditems() async {
+    return await hrepo.likedItems();
   }
 }

@@ -24,6 +24,13 @@ class DispItem extends ConsumerStatefulWidget {
 }
 
 class _DispItemState extends ConsumerState<DispItem> {
+  Future<bool> like(bool liked) {
+    final name = widget.data[widget.index - widget.minus].name;
+    return liked == false
+        ? ref.watch(homeControllerProvider.notifier).likeditem(name!)
+        : ref.watch(homeControllerProvider.notifier).dislikeditem(name!);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,12 +43,14 @@ class _DispItemState extends ConsumerState<DispItem> {
         focusColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onTap: () {
-          ref.read(homeControllerProvider.notifier).caroimages(widget.data[widget.index-widget.minus].name ?? "");
+          ref
+              .read(homeControllerProvider.notifier)
+              .caroimages(widget.data[widget.index - widget.minus].name ?? "");
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => ItemScreen(
-                        data: widget.data[widget.index-widget.minus],
+                        data: widget.data[widget.index - widget.minus],
                       )));
         },
         child: Column(
@@ -106,7 +115,10 @@ class _DispItemState extends ConsumerState<DispItem> {
                         color: Colors.black,
                         fontWeight: FontWeight.w600),
                   ),
-                  const LikeButton()
+                  LikeButton(
+                    isLiked: widget.data[widget.index - widget.minus].liked,
+                    onTap: like,
+                  )
                 ],
               ),
             )
